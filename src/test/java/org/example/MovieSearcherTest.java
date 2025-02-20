@@ -33,8 +33,8 @@ class MovieSearcherTest {
 
     @Test
     void oneMovieYearNineteenSeventyFive(){
-        assertEquals(1,movieSearcher.movieMade1975(moviesTest,1975));
-        assertEquals(2,movieSearcher.movieMade1975(moviesDoubleTest,1975));
+        assertEquals(1,movieSearcher.movieMadeYear(moviesTest,1975));
+        assertEquals(2,movieSearcher.movieMadeYear(moviesDoubleTest,1975));
     }
 
     @Test
@@ -96,6 +96,10 @@ class MovieSearcherTest {
     @Test
     void twoActorsInMoreThenOneMovie (){
         assertEquals(2,movieSearcher.moreThenOneMovieActorsAmount(moviesTest));
+    }
+
+    @Test
+    void fourTeenActorsInMoreThenOneMovieDoubleList (){
         assertEquals(14,movieSearcher.moreThenOneMovieActorsAmount(moviesDoubleTest));
         assertNotEquals(4,movieSearcher.moreThenOneMovieActorsAmount(moviesDoubleTest));
     }

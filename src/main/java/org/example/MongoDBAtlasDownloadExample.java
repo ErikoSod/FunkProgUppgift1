@@ -45,7 +45,7 @@ public class MongoDBAtlasDownloadExample {
             MovieSearcher ms = new MovieSearcher();
 
             //Hur många filmer gjordes 1975 (enligt vårt data). Returnera ett tal :107
-            System.out.println("Filmer gjorda 1975: "+ms.movieMade1975(movieList,1975));
+            System.out.println("Filmer gjorda 1975: "+ms.movieMadeYear(movieList,1975));
 
             //Hitta längden på den film som var längst (högst runtime). Returnera ett tal. :230
             System.out.println("Längsta speltiden: "+ms.movieMaxRuntimeSearch(movieList));

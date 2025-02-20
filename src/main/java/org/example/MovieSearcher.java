@@ -3,6 +3,7 @@ package org.example;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -17,6 +18,7 @@ public class MovieSearcher {
     private final MovieSearchInterface<List<String>> castSearch = Movie::getCast;
     private final MovieSearchInterface<List<String>> genreSearch = Movie::getGenres;
     private final MovieSearchInterface<List<String>> languageSearch = Movie::getLanguages;
+    private final Predicate<Map.Entry<String,Long>> moreThenOne = c ->c.getValue() >1;
 
 
     public double movieSearchMaxOrMinCount(List<Movie> movies, MovieSearchInterface<Double> msi, boolean max) {
@@ -40,7 +42,7 @@ public class MovieSearcher {
                 .entrySet();
     }
 
-    public long movieMade1975(List<Movie> movies,int year){
+    public long movieMadeYear(List<Movie> movies, int year){
         return movies.stream().filter(m->m.getYear()==year).count(); //ändra
     }
 
@@ -68,7 +70,7 @@ public class MovieSearcher {
 
     public long moreThenOneMovieActorsAmount(List<Movie> movies){
         return movieSearchFlatMapGroupCount(movies,castSearch)
-                .stream().filter(c -> c.getValue() > 1).count();
+                .stream().filter(moreThenOne).count();
     }
 
     public String actorInMostFilms(List<Movie> movies){
@@ -84,6 +86,6 @@ public class MovieSearcher {
     public boolean multipleTitles(List<Movie> movies) {
         return movies.stream()
                 .collect(Collectors.groupingBy(Movie::getTitle, Collectors.counting())).entrySet()
-                .stream().anyMatch(c ->c.getValue() >1);
+                .stream().anyMatch(moreThenOne);
     }
 }
